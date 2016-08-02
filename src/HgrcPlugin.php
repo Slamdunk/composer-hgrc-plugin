@@ -33,6 +33,8 @@ final class HgrcPlugin implements PluginInterface, EventSubscriberInterface
 
     public function ensureHgrcHook(Event $event)
     {
+        $this->io->write('> ' . __METHOD__);
+
         if (! $event->isDevMode()) {
             return;
         }

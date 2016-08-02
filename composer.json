@@ -1,0 +1,24 @@
+{
+    "name": "slam/composer-hgrc-plugin",
+    "type": "composer-plugin",
+    "description": "Install a hgrc hook to check composer dependancies which need to be updated",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Filippo Tessarotto",
+            "email": "zoeslam@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Slam\\Composer\\Hgrc\\": "src/"
+        }
+    },
+    "extra": {
+        "class": "Slam\\Composer\\Hgrc\\HgrcPlugin"
+    },
+    "require": {
+        "composer-plugin-api": "^1.0"
+    }
+}

@@ -1,0 +1,1 @@
+# composer-hgrc-plugin

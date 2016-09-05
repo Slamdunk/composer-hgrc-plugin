@@ -56,7 +56,7 @@ final class HgrcPlugin implements PluginInterface, EventSubscriberInterface
         $hgrcContentBefore = preg_replace('/^\#.*$/m', '', $hgrcContentBefore);
         $hgrcContent = parse_ini_string($hgrcContentBefore, true);
 
-        if (! is_array($hgrcContent['hooks'])) {
+        if (! isset($hgrcContent['hooks'])) {
             $hgrcContent['hooks'] = array();
         }
 

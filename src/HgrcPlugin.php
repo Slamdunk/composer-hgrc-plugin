@@ -11,7 +11,8 @@ use Composer\Script\ScriptEvents;
 
 final class HgrcPlugin implements PluginInterface, EventSubscriberInterface
 {
-    const HOOK_COMMAND = 'check-composer.sh';
+    const HOOK_NAME     = 'preupdate.deps';
+    const HOOK_COMMAND  = 'check-composer.sh';
 
     private $composer;
 
@@ -55,7 +56,16 @@ final class HgrcPlugin implements PluginInterface, EventSubscriberInterface
         $hgrcContentBefore = preg_replace('/^\#.*$/m', '', $hgrcContentBefore);
         $hgrcContent = parse_ini_string($hgrcContentBefore, true);
 
-        $hgrcContent['hooks']['update.deps'] = self::HOOK_COMMAND;
+        if (! is_array($hgrcContent['hooks'])) {
+            $hgrcContent['hooks'] = array();
+        }
+
+        foreach ($hgrcContent['hooks'] as $hookName => $hookCommand) {
+            if ($hookCommand === self::HOOK_COMMAND and $hookName !== self::HOOK_NAME) {
+                unset($hgrcContent['hooks'][$hookName]);
+            }
+        }
+        $hgrcContent['hooks'][self::HOOK_NAME] = self::HOOK_COMMAND;
 
         $hgrcContentAfter = array();
         foreach ($hgrcContent as $sectionKey => $section) {

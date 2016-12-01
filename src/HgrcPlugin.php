@@ -28,7 +28,6 @@ final class HgrcPlugin implements PluginInterface, EventSubscriberInterface
     {
         return array(
             ScriptEvents::POST_INSTALL_CMD => 'ensureHgrcHook',
-            ScriptEvents::POST_UPDATE_CMD => 'ensureHgrcHook',
         );
     }
 
